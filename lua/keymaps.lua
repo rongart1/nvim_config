@@ -8,13 +8,14 @@ vim.keymap.set('i', 'jj', '<Esc>')
 local term_buf = nil
 local term_win = nil
 
-vim.keymap.set('n', '<leader>t', function()
+vim.keymap.set('n', '<leader>T', function()
   if term_buf and vim.api.nvim_buf_is_valid(term_buf) then
     -- Reuse existing buffer
     if term_win and vim.api.nvim_win_is_valid(term_win) then
       vim.api.nvim_set_current_win(term_win)
     else
       vim.cmd 'split'
+      vim.cmd 'res -20'
       term_win = vim.api.nvim_get_current_win()
       vim.api.nvim_win_set_buf(term_win, term_buf)
     end
@@ -22,6 +23,7 @@ vim.keymap.set('n', '<leader>t', function()
     -- Create new terminal
     vim.cmd 'split'
     vim.cmd 'terminal'
+    vim.cmd 'res -20'
     term_win = vim.api.nvim_get_current_win()
     term_buf = vim.api.nvim_get_current_buf()
   end
@@ -64,10 +66,22 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
-
 vim.keymap.set('n', '<leader>r', function()
-  local file = vim.fn.expand '%:p'
-  local filename = vim.fn.expand '%:t:r'
+  local filepath = vim.fn.expand '%:p'
+  local filename = vim.fn.expand '%:t'
+  local classname = vim.fn.expand '%:t:r'
   local dir = vim.fn.expand '%:p:h'
-  vim.cmd('vsplit | terminal cd ' .. dir .. ' && javac ' .. file .. ' && java ' .. filename)
-end, { desc = 'Run current Java file' })
+  local package = nil
+
+  for line in io.lines(filepath) do
+    local pkg = line:match '^%s*package%s+([%w%.]+)%s*;'
+    if pkg then
+      package = pkg
+      break
+    end
+  end
+
+  local class_to_run = package and (package .. '.' .. classname) or classname
+
+  vim.cmd('vsplit | terminal cd ' .. dir .. ' && javac -d . ' .. filename .. ' && java ' .. class_to_run)
+end, { desc = 'Run current Java file (with package)' })

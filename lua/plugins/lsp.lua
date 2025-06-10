@@ -198,9 +198,10 @@ return {
             },
           },
         },
-        jdtls = {
-          root_dir = require('lspconfig.util').root_pattern('.git', 'mvnw', 'gradlew', 'pom.xml', 'build.gradle'),
-        },
+        -- jdtls = {
+        --   root_dir = require('lspconfig.util').root_pattern('.git', 'mvnw', 'gradlew', 'pom.xml', 'build.gradle'),
+        -- },
+        jdtls = false,
       }
 
       -- Ensure the servers and tools above are installed
