@@ -15,7 +15,12 @@ return {
           return 'make install_jsregexp'
         end)(),
         dependencies = {},
-        opts = {},
+        opts = function(_, opts)
+          -- Load all snippets from the snippets/ path
+          require('luasnip.loaders.from_lua').lazy_load {
+            paths = { vim.fn.stdpath 'config' .. '/lua/snippets' },
+          }
+        end,
       },
       'folke/lazydev.nvim',
     },
@@ -41,4 +46,3 @@ return {
     },
   },
 }
-

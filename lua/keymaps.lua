@@ -3,6 +3,7 @@
 
 -- double pressing j will go to normal mode
 vim.keymap.set('i', 'jj', '<Esc>')
+vim.keymap.set('i', 'kk', '<Esc>')
 
 -- opens terminal in insert mode and reuses existing buffer
 local term_buf = nil
