@@ -42,7 +42,7 @@ return {
       require('which-key').setup(opts)
 
       require('which-key').register {
-        ['<leader>a'] = { name = 'AI / Copilot' },
+        { '<leader>a', group = 'AI / Copilot' },
       }
     end,
   },

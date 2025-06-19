@@ -18,11 +18,10 @@ end
 -- Add lazy.nvim to runtime path
 vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
-  -- 🔁 Import plugins from external modules (e.g. lua/plugins/*.lua)
+  -- Import plugins from external modules (e.g. lua/plugins/*.lua)
   { import = 'plugins' },
   { import = 'plugins.treesitter' },
 
-  -- 🎨 Tokyonight Colorscheme
   {
     'folke/tokyonight.nvim',
     priority = 1000,
@@ -58,7 +57,7 @@ require('lazy').setup({
     end,
   },
 }, {
-  -- 🎛️ Lazy.nvim UI configuration
+  -- Lazy.nvim UI configuration
   ui = {
     icons = vim.g.have_nerd_font and {} or {
       cmd = '⌘',
