@@ -27,7 +27,10 @@ require('lazy').setup({
     priority = 1000,
     config = function()
       require('tokyonight').setup {
+        transparent = true,
         styles = {
+          sidebars = "transparent",
+          floats = "transparent",
           comments = { italic = false },
         },
       }

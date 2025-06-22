@@ -29,35 +29,35 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 local java_winid, java_bufnr
 
 vim.keymap.set('n', '<leader>rj', function()
-  -- if there’s an old run open, close its window + delete its buffer
-  if java_winid and vim.api.nvim_win_is_valid(java_winid) then
-    vim.api.nvim_win_close(java_winid, true)
-  end
-  if java_bufnr and vim.api.nvim_buf_is_valid(java_bufnr) then
-    vim.api.nvim_buf_delete(java_bufnr, { force = true })
-  end
+	-- if there’s an old run open, close its window + delete its buffer
+	if java_winid and vim.api.nvim_win_is_valid(java_winid) then
+		vim.api.nvim_win_close(java_winid, true)
+	end
+	if java_bufnr and vim.api.nvim_buf_is_valid(java_bufnr) then
+		vim.api.nvim_buf_delete(java_bufnr, { force = true })
+	end
 
-  -- save current file
-  vim.cmd 'write'
+	-- save current file
+	vim.cmd 'write'
 
-  -- determine package & class
-  local filepath = vim.fn.expand '%:p'
-  local classname = vim.fn.expand '%:t:r'
-  local dir = vim.fn.expand '%:p:h'
-  local pkg
-  for line in io.lines(filepath) do
-    local m = line:match '^%s*package%s+([%w%.]+)%s*;'
-    if m then
-      pkg = m
-      break
-    end
-  end
-  local class_to_run = (pkg and pkg .. '.' .. classname) or classname
+	-- determine package & class
+	local filepath = vim.fn.expand '%:p'
+	local classname = vim.fn.expand '%:t:r'
+	local dir = vim.fn.expand '%:p:h'
+	local pkg
+	for line in io.lines(filepath) do
+		local m = line:match '^%s*package%s+([%w%.]+)%s*;'
+		if m then
+			pkg = m
+			break
+		end
+	end
+	local class_to_run = (pkg and pkg .. '.' .. classname) or classname
 
-  -- open new split + run
-  vim.cmd 'w'
-  vim.cmd 'vsplit'
-  java_winid = vim.api.nvim_get_current_win()
-  vim.cmd('terminal cd ' .. dir .. ' && javac -d . *.java && java ' .. class_to_run)
-  java_bufnr = vim.api.nvim_get_current_buf()
+	-- open new split + run
+	vim.cmd 'w'
+	vim.cmd 'vsplit'
+	java_winid = vim.api.nvim_get_current_win()
+	vim.cmd('terminal cd ' .. dir .. ' && javac -d . *.java && java ' .. class_to_run)
+	java_bufnr = vim.api.nvim_get_current_buf()
 end, { desc = 'Run current Java file (with package)' })
