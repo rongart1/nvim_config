@@ -23,19 +23,9 @@ require('lazy').setup({
   { import = 'plugins.treesitter' },
 
   {
-    'folke/tokyonight.nvim',
+    'ellisonleao/gruvbox.nvim',
     priority = 1000,
-    config = function()
-      require('tokyonight').setup {
-        transparent = true,
-        styles = {
-          sidebars = "transparent",
-          floats = "transparent",
-          comments = { italic = false },
-        },
-      }
-      vim.cmd.colorscheme 'tokyonight-night'
-    end,
+    config = true,
   },
 
   -- ✅ Highlight TODO/FIXME/HACK etc.
@@ -79,5 +69,14 @@ require('lazy').setup({
     },
   },
 })
+vim.o.background = "dark" -- or "light"
+
+require("gruvbox").setup({
+  contrast = "soft", -- options: soft, medium, hard
+  transparent_mode = true,
+})
+
+
+vim.cmd.colorscheme('gruvbox')
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
