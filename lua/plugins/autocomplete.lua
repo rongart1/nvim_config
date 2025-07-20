@@ -1,6 +1,6 @@
 -- lua/plugins/blink-cmp.lua
 return {
-  { -- Autocompletion
+  {
     'saghen/blink.cmp',
     event = 'VimEnter',
     version = '1.*',
@@ -16,7 +16,6 @@ return {
         end)(),
         dependencies = {},
         opts = function(_, opts)
-          -- Load all snippets from the snippets/ path
           require('luasnip.loaders.from_lua').lazy_load {
             paths = { vim.fn.stdpath 'config' .. '/lua/snippets' },
           }
@@ -25,9 +24,23 @@ return {
       'folke/lazydev.nvim',
     },
     opts = {
+
       keymap = {
-        preset = 'default',
+        preset = 'none',
+
+        ['<S-y>'] = { 'accept' },
+
+        -- Navigate items
+        ['<S-j>'] = { 'select_next' },
+        ['<S-k>'] = { 'select_prev' },
+
+        -- Show documentation (mapped to Shift-H for safety)
+        ['<S-h>'] = { 'show_documentation' },
+
+        -- Optional: cancel menu with Escape
+        ['<Esc>'] = { 'cancel', 'fallback' },
       },
+
       appearance = {
         nerd_font_variant = 'mono',
       },
