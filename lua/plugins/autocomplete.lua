@@ -28,14 +28,13 @@ return {
       keymap = {
         preset = 'none',
 
-        ['<S-y>'] = { 'accept' },
+        ['<C-y>'] = { 'accept' },
 
         -- Navigate items
-        ['<S-j>'] = { 'select_next' },
-        ['<S-k>'] = { 'select_prev' },
+        ['<C-n>'] = { 'select_next' },
+        ['<C-p>'] = { 'select_prev' },
 
-        -- Show documentation (mapped to Shift-H for safety)
-        ['<S-h>'] = { 'show_documentation' },
+        ['<C-i>'] = { 'show_documentation' },
 
         -- Optional: cancel menu with Escape
         ['<Esc>'] = { 'cancel', 'fallback' },
