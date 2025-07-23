@@ -38,6 +38,8 @@ return {
 
         -- Optional: cancel menu with Escape
         ['<Esc>'] = { 'cancel', 'fallback' },
+        ['<Tab>'] = { 'snippet_forward', 'fallback' },
+        ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
       },
 
       appearance = {
