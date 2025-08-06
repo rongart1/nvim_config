@@ -12,7 +12,7 @@ return {
   opts = {
     window = {
       backdrop = 0.95,
-      width = 100,
+      width = 200,
       height = 1,
       options = {
         signcolumn = 'no',
@@ -24,7 +24,7 @@ return {
     plugins = {
       options = {
         enabled = true,
-        ruler = false,
+        ruler = true,
         showcmd = false,
       },
       twilight = { enabled = false },
