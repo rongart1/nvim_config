@@ -49,6 +49,7 @@ require('lazy').setup({
       end
     end,
   },
+  { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
 }, {
   -- Lazy.nvim UI configuration
   ui = {
@@ -69,13 +70,8 @@ require('lazy').setup({
     },
   },
 })
-vim.o.background = 'dark' -- or "light"
 
-require('gruvbox').setup {
-  contrast = '', -- options: soft, medium, hard
-  transparent_mode = false,
-}
+vim.cmd.colorscheme 'catppuccin-mocha'
 
-vim.cmd.colorscheme 'gruvbox'
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
