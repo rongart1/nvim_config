@@ -196,6 +196,8 @@ return {
             return vim.loop.cwd()
           end,
           on_attach = function(client, bufnr)
+            client.server_capabilities.documentFormattingProvider = false
+            client.server_capabilities.documentRangeFormattingProvider = false
             if client.name == 'omnisharp' and client.server_capabilities.semanticTokensProvider then
               client.server_capabilities.semanticTokensProvider = {
                 full = vim.empty_dict(),

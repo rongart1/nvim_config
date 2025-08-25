@@ -49,7 +49,24 @@ require('lazy').setup({
       end
     end,
   },
-  { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
+  { -- Catppuccin with transparent background
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    priority = 1000,
+    opts = {
+      flavour = 'mocha',
+      transparent_background = true,
+      integrations = {
+        treesitter = true,
+        mini = { enabled = true },
+        telescope = { enabled = true },
+        gitsigns = true,
+        cmp = true,
+        which_key = true,
+        -- add others you use...
+      },
+    },
+  },
 }, {
   -- Lazy.nvim UI configuration
   ui = {
@@ -72,6 +89,7 @@ require('lazy').setup({
 })
 
 vim.cmd.colorscheme 'catppuccin-mocha'
+
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
